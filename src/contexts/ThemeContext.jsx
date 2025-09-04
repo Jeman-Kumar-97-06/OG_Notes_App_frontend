@@ -1,4 +1,9 @@
 import { createContext,useReducer } from "react";
 
-const ThemeContext = createContext();
+export const ThemeContext = createContext();
 
+export const themeReducer = (state,action) => {
+    switch(action.type){
+        
+    }
+} 
