@@ -6,10 +6,12 @@ export const ThemeContext = createContext();
 export const themeReducer = (state,action) => {
     switch(action.type){
         case 'DO_DARK':
+            localStorage.setItem('theme','dark')
             return {
                 theme : "dark"
             }
         case "DO_LIGHT":
+            localStorage.setItem('theme','light')
             return {
                 theme : "light"
             }
@@ -19,9 +21,9 @@ export const themeReducer = (state,action) => {
 };
 
 export const ThemeContextProvider = ({children}) => {
-    const [state,dispatch] = useReducer(themeReducer,{theme:"light"});
+    const [state,dispatch] = useReducer(themeReducer,{theme:null});
     useEffect(()=>{
-        const thme = JSON.parse(localStorage.getItem('theme'));
+        const thme = localStorage.getItem('theme');
         if (thme == 'dark'){
             dispatch({type:'DO_DARK'})
         }

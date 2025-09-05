@@ -11,19 +11,17 @@ export default function Home() {
   // add/remove dark class to html
   useEffect(() => {
     if (darkMode) {
-      document.documentElement.classList.add("dark");
       dispatch({type:"DO_DARK"})
     } else {
-      document.documentElement.classList.remove("dark");
       dispatch({type:"DO_LIGHT"})
     }
   }, [darkMode]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-pink-50 to-purple-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex flex-col transition-colors">
+    <div className={`min-h-screen bg-gradient-to-br from-indigo-100 via-pink-50 to-purple-100 ${theme == 'dark' ? 'dark:from-gray-900 dark:via-gray-800 dark:to-gray-900' : ''} flex flex-col transition-colors`}>
       {/* Header */}
-      <header className="p-6 flex justify-between items-center bg-white dark:bg-gray-800 shadow-md">
-        <h1 className="text-2xl font-bold text-indigo-700 dark:text-indigo-300">
+      <header className={`p-6 flex justify-between items-center bg-white ${theme == 'dark' ? 'dark:bg-gray-800' : ''} shadow-md`}>
+        <h1 className={`text-2xl font-bold text-indigo-700 ${theme == 'dark' ? 'dark:text-indigo-300' : ''}`} >
           MindSpace Journal
         </h1>
 
