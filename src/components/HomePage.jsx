@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { Notebook, Heart, Calendar, Smile, Sun, Moon } from "lucide-react";
+import { useThemeContext } from "../hooks/useThemeContext";
 
 export default function Home() {
   const [darkMode, setDarkMode] = useState(false);
+  const {theme,dispatch}        = useThemeContext();
+
+  console.log(theme)
 
   // add/remove dark class to html
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add("dark");
+      dispatch({type:"DO_DARK"})
     } else {
       document.documentElement.classList.remove("dark");
+      dispatch({type:"DO_LIGHT"})
     }
   }, [darkMode]);
 
