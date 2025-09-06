@@ -13,6 +13,7 @@ import {
 
 export default function JournalHome() {
   const [darkMode, setDarkMode] = useState(false);
+  const [mood, setMoode]        = useState(null);
   const [entries, setEntries] = useState([ {
     id: 1,
     text: "Today I felt calmer after doing 10 minutes of breathing exercises. Writing here helps me track my mood.",
@@ -20,6 +21,8 @@ export default function JournalHome() {
   },]);
   const [search, setSearch] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
+  const [newEntry,setNewEntry]   = useState(null);
+  const [editingId, setEditingId] = useState(null);
 
   // modal states
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -111,8 +114,8 @@ export default function JournalHome() {
         </div>
 
         {/* Entries List */}
-        <section className="space-y-4">
-          {filteredEntries.length > 0 ? (
+        <ul className="space-y-4">
+          {/* {filteredEntries.length > 0 ? (
             filteredEntries.map((entry) => (
               <div key={entry.id} className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">
                 <p className="text-gray-800 dark:text-gray-200">{entry.text}</p>
@@ -121,51 +124,117 @@ export default function JournalHome() {
             ))
           ) : (
             <p className="text-gray-600 dark:text-gray-400 text-center">No entries found.</p>
-          )}
-        </section>
+          )} */}
+          {entries.map((entry) => (
+            <li
+                key={entry.id}
+                className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow flex flex-col"
+            >
+                <div className="flex justify-between items-start">
+                    <p className="text-gray-800 dark:text-gray-200">{entry.text}</p>
+                    <div className="flex space-x-2">
+                        {/* Edit Button */}
+                        <button
+                            onClick={() => handleEdit(entry.id)}
+                            className="px-3 py-1 text-sm bg-indigo-100 text-indigo-600 dark:bg-indigo-700 dark:text-indigo-200 rounded-md hover:bg-indigo-200 dark:hover:bg-indigo-600"
+                        >
+                            Edit
+                        </button>
+                        {/* Delete Button */}
+                        <button
+                            onClick={() => handleDelete(entry.id)}
+                            className="px-3 py-1 text-sm bg-red-100 text-red-600 dark:bg-red-700 dark:text-red-200 rounded-md hover:bg-red-200 dark:hover:bg-red-600"
+                        >
+                            Delete
+                        </button>
+                    </div>
+                </div>
+                <span className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                    {entry.date}
+                </span>
+            </li>
+            ))}
+        </ul>
       </main>
 
       {/* Modal for New Entry */}
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-black/50 dark:bg-black/70 flex items-center justify-center z-50">
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg w-full max-w-lg relative">
-            {/* Close Button */}
+      {/* Modal Overlay */}
+    {isModalOpen && (
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+        <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl w-full max-w-3xl p-8 relative">
+        
+        {/* Header */}
+        <h2 className="text-2xl font-bold text-indigo-700 dark:text-indigo-300 mb-6">
+            {editingId ? "Edit Entry" : "New Journal Entry"}
+        </h2>
+
+        {/* Big Textarea */}
+        <textarea
+            rows={10}
+            value={newEntry}
+            onChange={(e) => setNewEntry(e.target.value)}
+            placeholder="Write your thoughts freely..."
+            className="w-full p-4 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-indigo-500 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 resize-none"
+        />
+
+        {/* Toolbar */}
+        <div className="flex items-center justify-between mt-4">
+            <div className="flex space-x-3">
+            {/* Mic Button */}
             <button
-              onClick={() => setIsModalOpen(false)}
-              className="absolute top-4 right-4 p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+                type="button"
+                className="p-3 bg-indigo-100 dark:bg-indigo-700 text-indigo-600 dark:text-indigo-200 rounded-lg hover:scale-105 transition"
             >
-              <X className="h-5 w-5 text-gray-600 dark:text-gray-300" />
+                🎤
             </button>
 
-            <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-4">New Entry</h2>
-
-            <textarea
-              rows="6"
-              value={newEntryText}
-              onChange={(e) => setNewEntryText(e.target.value)}
-              placeholder="Write your thoughts..."
-              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-indigo-400 focus:outline-none"
-            ></textarea>
-
-            <div className="flex items-center justify-between mt-4">
-              <div className="flex gap-3">
-                <button type="button" className="p-2 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600">
-                  <Mic className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
-                </button>
-                <button type="button" className="p-2 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600">
-                  <Paperclip className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
-                </button>
-              </div>
-              <button
-                onClick={handleSaveEntry}
-                className="px-6 py-2 bg-indigo-600 text-white rounded-lg shadow-md hover:bg-indigo-700 transition"
-              >
-                Save
-              </button>
+            {/* Clip Button */}
+            <button
+                type="button"
+                className="p-3 bg-pink-100 dark:bg-pink-700 text-pink-600 dark:text-pink-200 rounded-lg hover:scale-105 transition"
+            >
+                📎
+            </button>
             </div>
-          </div>
+
+            {/* Mood Selector */}
+            <div className="flex space-x-2">
+            {["😊", "😐", "😢", "😡", "😴"].map((emoji) => (
+                <button
+                key={emoji}
+                onClick={() => setMood(emoji)}
+                type="button"
+                className={`px-3 py-2 text-2xl rounded-lg transition ${
+                    mood === emoji
+                    ? "bg-indigo-600 text-white"
+                    : "bg-gray-100 dark:bg-gray-700"
+                }`}
+                >
+                {emoji}
+                </button>
+            ))}
+            </div>
         </div>
-      )}
+
+        {/* Save / Cancel */}
+        <div className="mt-6 flex justify-end space-x-4">
+            <button
+            onClick={() => setIsModalOpen(false)}
+            className="px-6 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600"
+            >
+            Cancel
+            </button>
+            <button
+            onClick={handleSave}
+            className="px-6 py-2 rounded-lg bg-indigo-600 text-white font-semibold hover:bg-indigo-700 shadow-md"
+            >
+            Save Entry
+            </button>
+        </div>
+        </div>
+    </div>
+    )}
+
     </div>
   );
 }
