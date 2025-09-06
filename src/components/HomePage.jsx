@@ -22,7 +22,7 @@ export default function Home() {
       {/* Header */}
       <header className={`p-6 flex justify-between items-center bg-white ${theme == 'dark' ? 'dark:bg-gray-800' : ''} shadow-md`}>
         <h1 className={`text-2xl font-bold text-indigo-700 ${theme == 'dark' ? 'dark:text-indigo-300' : ''}`} >
-          MindSpace Journal
+          MindFul Journal
         </h1>
 
         <div className="flex items-center space-x-4">
@@ -56,7 +56,7 @@ export default function Home() {
           Reflect, track your moods, and practice mindfulness every day.
           Your safe space for growth and healing.
         </p>
-        <button className="px-6 py-3 bg-indigo-600 text-white rounded-xl shadow-md hover:bg-indigo-700 transition">
+        <button className="cursor-pointer px-6 py-3 bg-indigo-600 text-white rounded-xl shadow-md hover:bg-indigo-700 transition">
           Start Journaling
         </button>
       </section>
@@ -89,8 +89,8 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-white dark:bg-gray-800 p-4 text-center text-gray-500 dark:text-gray-400">
-        <p>Made with ❤️ for your peace of mind</p>
+      <footer className={`bg-white ${theme == 'dark' ? 'dark:bg-gray-800' : ''} p-4 text-center text-gray-500 ${theme == 'dark' ? 'dark:text-gray-400' : ''}`}>
+        <p>Made to make you feel grateful ❤️ !</p>
       </footer>
     </div>
   );
