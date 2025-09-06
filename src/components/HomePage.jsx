@@ -27,10 +27,11 @@ export default function Home() {
 
         <div className="flex items-center space-x-4">
           <nav className="hidden md:flex space-x-4">
-            <a href="#" className={`text-gray-600 ${theme =='dark' ? 'dark:text-gray-300 dark:hover:text-indigo-400' : ''} hover:text-indigo-600 `}>Home</a>
+            <a href="#" className={`text-gray-600 ${theme =='dark' ? 'dark:text-gray-300 dark:hover:text-indigo-400' : ''} hover:text-indigo-600 `}>Login</a>
             <a href="#" className={`text-gray-600 ${theme =='dark' ? 'dark:text-gray-300 dark:hover:text-indigo-400' : ''} hover:text-indigo-600 `}>Entries</a>
             <a href="#" className={`text-gray-600 ${theme =='dark' ? 'dark:text-gray-300 dark:hover:text-indigo-400' : ''} hover:text-indigo-600 `}>Calendar</a>
             <a href="#" className={`text-gray-600 ${theme =='dark' ? 'dark:text-gray-300 dark:hover:text-indigo-400' : ''} hover:text-indigo-600 `}>Profile</a>
+            <a href="#" className={`text-gray-600 ${theme =='dark' ? 'dark:text-gray-300 dark:hover:text-indigo-400' : ''} hover:text-indigo-600 `}>Logout</a>
           </nav>
 
           {/* Dark mode toggle */}
