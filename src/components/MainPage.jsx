@@ -1,31 +1,29 @@
 import React, { useState, useEffect } from "react";
-import {
-  Notebook,
-  Mic,
-  Paperclip,
-  Search,
-  Sun,
-  Moon,
-  Calendar as CalendarIcon,
-  Plus,
-  X,
-} from "lucide-react";
+import {Notebook,Mic,Paperclip,Search,Sun,Moon,Calendar as CalendarIcon,Plus,X,} from "lucide-react";
 
 export default function JournalHome() {
+
   const [darkMode, setDarkMode] = useState(false);
+  
   const [mood, setMoode]        = useState(null);
+  
   const [entries, setEntries] = useState([ {
     id: 1,
     text: "Today I felt calmer after doing 10 minutes of breathing exercises. Writing here helps me track my mood.",
     date: new Date().toISOString().split("T")[0], // today’s date
   },]);
+  
   const [search, setSearch] = useState("");
+  
   const [selectedDate, setSelectedDate] = useState("");
+  
   const [newEntry,setNewEntry]   = useState(null);
+  
   const [editingId, setEditingId] = useState(null);
 
   // modal states
   const [isModalOpen, setIsModalOpen] = useState(false);
+  
   const [newEntryText, setNewEntryText] = useState("");
 
   // dark mode toggle logic
