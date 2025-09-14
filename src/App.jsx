@@ -1,4 +1,3 @@
-
 import Home from "./components/HomePage"
 import AuthDialog from "./components/Login_Signup"
 import JournalHome from "./components/MainPage"
