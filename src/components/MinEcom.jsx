@@ -1,13 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-// Minimalist E‑commerce single-file React component (Tailwind CSS assumed)
-// Style notes:
-// - Monochromatic base (grays/whites)
-// - Neon yellow accent for CTAs (neon lamp feel)
-// - Clean lines, lots of whitespace
-// - Subtle Paul Klee–inspired abstract SVG in the background (pastel)
-
 const PRODUCTS = [
   {
     id: 1,
