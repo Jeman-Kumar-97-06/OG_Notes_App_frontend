@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Notebook, Sun, Moon } from "lucide-react";
+import { useThemeContext } from "../hooks/useThemeContext";
 
 export default function AuthDialog() {
-  const [isLogin, setIsLogin] = useState(true);
-  const [darkMode, setDarkMode] = useState(false);
+  const {theme,dispatch}        = useThemeContext();
+  let   dm                      = theme === 'dark' ? false : true
+  const [isLogin, setIsLogin]   = useState(true);
+  const [darkMode, setDarkMode] = useState(dm);
 
   // add/remove dark class on html
   useEffect(() => {
     if (darkMode) {
-      document.documentElement.classList.add("dark");
+      dispatch({type:'DO_DARK'})
     } else {
-      document.documentElement.classList.remove("dark");
+      dispatch({type:"DO_LIGHT"})
     }
   }, [darkMode]);
 
