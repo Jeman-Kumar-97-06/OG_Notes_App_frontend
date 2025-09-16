@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Notebook, Heart, Calendar, Smile, Sun, Moon } from "lucide-react";
 import { useThemeContext } from "../hooks/useThemeContext";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const {theme,dispatch}        = useThemeContext();
@@ -27,7 +28,7 @@ export default function Home() {
 
         <div className="flex items-center space-x-4">
           <nav className="hidden md:flex space-x-4">
-            <a href="#" className={`text-gray-600 ${theme =='dark' ? 'dark:text-gray-300 dark:hover:text-indigo-400' : ''} hover:text-indigo-600 `}>Login</a>
+            <Link to='/auth' className={`text-gray-600 ${theme =='dark' ? 'dark:text-gray-300 dark:hover:text-indigo-400' : ''} hover:text-indigo-600 `}>Login</Link>
             <a href="#" className={`text-gray-600 ${theme =='dark' ? 'dark:text-gray-300 dark:hover:text-indigo-400' : ''} hover:text-indigo-600 `}>Entries</a>
             <a href="#" className={`text-gray-600 ${theme =='dark' ? 'dark:text-gray-300 dark:hover:text-indigo-400' : ''} hover:text-indigo-600 `}>Calendar</a>
             <a href="#" className={`text-gray-600 ${theme =='dark' ? 'dark:text-gray-300 dark:hover:text-indigo-400' : ''} hover:text-indigo-600 `}>Profile</a>
@@ -57,9 +58,9 @@ export default function Home() {
           Reflect, track your moods, and practice mindfulness every day.
           Your safe space for growth and healing.
         </p>
-        <button className="cursor-pointer px-6 py-3 bg-indigo-600 text-white rounded-xl shadow-md hover:bg-indigo-700 transition">
+        <Link to='/main' className="cursor-pointer px-6 py-3 bg-indigo-600 text-white rounded-xl shadow-md hover:bg-indigo-700 transition">
           Start Journaling
-        </button>
+        </Link>
       </section>
 
       {/* Features */}
