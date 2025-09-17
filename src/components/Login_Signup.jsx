@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Notebook, Sun, Moon } from "lucide-react";
 import { useThemeContext } from "../hooks/useThemeContext";
 import { useLogin } from "../hooks/useLogin";
+import { useSignup } from "../hooks/useSignup";
 
 export default function AuthDialog() {
   const {theme,dispatch}        = useThemeContext();
@@ -16,8 +17,9 @@ export default function AuthDialog() {
   const [username,setUsername]  = useState('');
   const [email,setEmail]        = useState('');
   const [password,setPassword]  = useState('');
-  const [pfp,setPfp]            = useState('');
-  const [err,setErr]            = useState('');
+  const [cpasswrd,setCpasswrd]  = useState('');
+  const [pfp,setPfp]            = useState(null);
+  const [err,setErr]            = useState(null);
 
   // add/remove dark class on html
   useEffect(() => {
@@ -35,6 +37,10 @@ export default function AuthDialog() {
       return;
     }
     await login(username,password)
+  }
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
   }
 
   return (
