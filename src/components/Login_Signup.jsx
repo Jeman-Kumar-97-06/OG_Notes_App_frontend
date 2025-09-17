@@ -41,8 +41,18 @@ export default function AuthDialog() {
 
   const handleSignup = async (e) => {
     e.preventDefault();
+    if (!username || !fullname || !email || !password || !cpasswrd) {
+      setErr("All fields must be filled!");
+    }
+    if (password !== cpasswrd) {
+      setErr("Passwords don't match")
+    }
+    await Signup(fullname,username,email,password,pfp)
   }
-
+  const handleFileChange = (e) => {
+    setPfp(e.target.files[0]);
+  } 
+  
   return (
     <div className={`min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 via-pink-50 to-purple-100 ${theme =='dark' ? 'dark:from-gray-900 dark:via-gray-800 dark:to-gray-900' : ''} p-6 transition-colors`}>
       {/* Dialog Box */}
