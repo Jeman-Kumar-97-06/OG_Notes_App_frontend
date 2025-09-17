@@ -5,8 +5,11 @@ import { useThemeContext } from "../hooks/useThemeContext";
 export default function AuthDialog() {
   const {theme,dispatch}        = useThemeContext();
   let   dm                      = theme === 'dark' ? false : true
-  const [isLogin, setIsLogin]   = useState(true);
   const [darkMode, setDarkMode] = useState(dm);
+
+  const [isLogin, setIsLogin]   = useState(true);
+
+  const [username,setUsername]  = useState('');
 
   // add/remove dark class on html
   useEffect(() => {
