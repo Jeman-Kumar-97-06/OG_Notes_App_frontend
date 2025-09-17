@@ -29,6 +29,6 @@ export const useSignup = () => {
             setIsloading(false);
             setError(null);
         }
-        return {error,isloading,signup};
     }
+    return {error,isloading,signup};
 }

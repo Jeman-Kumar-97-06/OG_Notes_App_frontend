@@ -11,7 +11,8 @@ export default function AuthDialog() {
 
   const [isLogin, setIsLogin]   = useState(true);
 
-  const {error,isloading,login} = useLogin();
+  const {error:lerror,isloading:lisloading,login} = useLogin();
+  const {error:serror,isloading:sisloading,signup}= useSignup();
 
   const [fullname,setFullname]  = useState('');
   const [username,setUsername]  = useState('');
@@ -30,8 +31,13 @@ export default function AuthDialog() {
     }
   }, [darkMode]);
 
-  const handleLogin = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    isLogin ? handleLogin() : handleSignup()
+  }
+
+  const handleLogin = async () => {
+    //e.preventDefault();
     if (!username || !password) {
       setErr('All fields must be filled!');
       return;
@@ -39,16 +45,17 @@ export default function AuthDialog() {
     await login(username,password)
   }
 
-  const handleSignup = async (e) => {
-    e.preventDefault();
+  const handleSignup = async () => {
+    //e.preventDefault();
     if (!username || !fullname || !email || !password || !cpasswrd) {
       setErr("All fields must be filled!");
     }
     if (password !== cpasswrd) {
       setErr("Passwords don't match")
     }
-    await Signup(fullname,username,email,password,pfp)
+    await signup(fullname,username,email,password,pfp)
   }
+
   const handleFileChange = (e) => {
     setPfp(e.target.files[0]);
   } 
@@ -78,21 +85,38 @@ export default function AuthDialog() {
         </div>
 
         {/* Form */}
-        <form className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           {!isLogin && (
+            <>
             <div>
-              <label className={`block text-black ${theme == 'dark' ? 'dark:text-gray-300' : ''} font-medium mb-1`}>Name</label>
+              <label className={`block text-black ${theme == 'dark' ? 'dark:text-gray-300' : ''} font-medium mb-1`}>Fullname</label>
               <input
+                value={fullname}
+                onChange={e=>setFullname(e.target.value)}
                 type="text"
                 placeholder="Enter your name"
                 className={`w-full px-4 py-2 border border-gray-300 ${theme == 'dark' ? 'dark:border-gray-600':''} rounded-lg bg-white ${theme == 'dark' ? 'dark:bg-gray-700' : ''} text-black ${theme == 'dark' ? 'dark:text-gray-100':''} focus:ring-2 focus:ring-indigo-400 focus:outline-none`}
               />
             </div>
+
+            <div>
+              <label className={`block text-black ${theme == 'dark' ? 'dark:text-gray-300' : ''} font-medium mb-1`}>Username</label>
+              <input
+                value={username}
+                onChange={e=>setUsername(e.target.value)}
+                type="text"
+                placeholder="Enter your name"
+                className={`w-full px-4 py-2 border border-gray-300 ${theme == 'dark' ? 'dark:border-gray-600':''} rounded-lg bg-white ${theme == 'dark' ? 'dark:bg-gray-700' : ''} text-black ${theme == 'dark' ? 'dark:text-gray-100':''} focus:ring-2 focus:ring-indigo-400 focus:outline-none`}
+              />
+            </div>
+            </>
           )}
 
           <div>
             <label className={`block black ${theme == 'dark' ? 'dark:text-gray-300' : ''} font-medium mb-1`}>Email</label>
             <input
+              value={email}
+              onChange={e=>setEmail(e.target.value)}
               type="email"
               placeholder="Enter your email"
               className={`w-full px-4 py-2 border border-gray-300 ${theme == 'dark' ? 'dark:border-gray-600 dark:text-gray-100 dark:bg-gray-700' : ''} rounded-lg bg-white text-gray-800 focus:ring-2 focus:ring-indigo-400 focus:outline-none`}
@@ -102,11 +126,36 @@ export default function AuthDialog() {
           <div>
             <label className={`block text-black ${theme=='dark' ? 'dark:text-gray-300' : ''} font-medium mb-1`}>Password</label>
             <input
+              value={password}
+              onChange={e=>setPassword(e.target.value)}
               type="password"
               placeholder={isLogin ? "Enter your password" : "Create a password"}
               className={`w-full px-4 py-2 border border-gray-300 ${theme == 'dark' ? 'dark:border-gray-600 dark:text-gray-100 dark:bg-gray-700' : ''} rounded-lg bg-white text-gray-800 focus:ring-2 focus:ring-indigo-400 focus:outline-none`}
             />
           </div>
+
+          {!isLogin && (
+            <>
+            <div>
+            <label className={`block text-black ${theme=='dark' ? 'dark:text-gray-300' : ''} font-medium mb-1`}>Confirm Password</label>
+            <input
+              value={cpasswrd}
+              onChange={e=>setCpasswrd(e.target.value)}
+              type="password"
+              placeholder='Enter password again'
+              className={`w-full px-4 py-2 border border-gray-300 ${theme == 'dark' ? 'dark:border-gray-600 dark:text-gray-100 dark:bg-gray-700' : ''} rounded-lg bg-white text-gray-800 focus:ring-2 focus:ring-indigo-400 focus:outline-none`}
+            />
+          </div>
+            <div>
+              <label className={`block text-black ${theme == 'dark' ? 'dark:text-gray-300' : ''} font-medium mb-1`}>Upload a profile picture</label>
+              <input
+                type="file"
+                className={`w-full px-4 py-2 border border-gray-300 ${theme == 'dark' ? 'dark:border-gray-600':''} rounded-lg bg-white ${theme == 'dark' ? 'dark:bg-gray-700' : ''} text-black ${theme == 'dark' ? 'dark:text-gray-100':''} focus:ring-2 focus:ring-indigo-400 focus:outline-none`}
+                onChange={handleFileChange}
+              />
+            </div>
+            </>
+          )}
 
           <button
             type="submit"
