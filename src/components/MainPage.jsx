@@ -32,8 +32,6 @@ export default function JournalHome() {
           MindSpace Journal
         </h1>
         <nav className="flex space-x-4">
-          <a href="#" className={`text-gray-600 ${ theme == 'dark' ? 'dark:text-gray-300' : ''} hover:text-indigo-600 dark:hover:text-indigo-400`}>Home</a>
-          <a href="#" className={`text-gray-600 ${ theme == 'dark' ? 'dark:text-gray-300' : ''} hover:text-indigo-600 dark:hover:text-indigo-400`}>Entries</a>
           <a href="#" className={`text-gray-600 ${ theme == 'dark' ? 'dark:text-gray-300' : ''} hover:text-indigo-600 dark:hover:text-indigo-400`}>Calendar</a>
           <a href="#" className={`text-gray-600 ${ theme == 'dark' ? 'dark:text-gray-300' : ''} hover:text-indigo-600 dark:hover:text-indigo-400`}>Profile</a>
           {/* Dark Mode Toggle */}
