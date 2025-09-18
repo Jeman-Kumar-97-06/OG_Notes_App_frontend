@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Notebook, Heart, Calendar, Smile, Sun, Moon } from "lucide-react";
 import { useThemeContext } from "../hooks/useThemeContext";
 import { Link } from "react-router-dom";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 export default function Home() {
-  const {theme,dispatch}        = useThemeContext();
-  let dm                        = theme == 'dark' ? false : true
-  const [darkMode, setDarkMode] = useState(dm);
+  const {user,dispatch:authDispatch} = useAuthContext();
+  const {theme,dispatch}             = useThemeContext();
+  let dm                             = theme == 'dark' ? false : true
+  const [darkMode, setDarkMode]      = useState(dm);
   
 
   // add/remove dark class to html
