@@ -14,7 +14,7 @@ export const useSignup = () => {
         fData.append('email',email);
         fData.append('pwd',pwd)
         fData.append('pFp',pfp);
-        const resp = await fetch('/api/users/signup',{
+        const resp = await fetch('http://localhost:3000/api/users/signup',{
             method:"POST",
             body:fData
         })

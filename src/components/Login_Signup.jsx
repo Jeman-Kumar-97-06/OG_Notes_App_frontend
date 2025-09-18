@@ -22,6 +22,15 @@ export default function AuthDialog() {
   const [pfp,setPfp]            = useState(null);
   const [err,setErr]            = useState(null);
 
+  function handleL_SChange() {
+    setFullname('');
+    setUsername('');
+    setEmail('');
+    setPassword('');
+    setCpasswrd('');
+    setPfp(null);
+  }
+
   // add/remove dark class on html
   useEffect(() => {
     if (darkMode) {
@@ -38,11 +47,11 @@ export default function AuthDialog() {
 
   const handleLogin = async () => {
     //e.preventDefault();
-    if (!username || !password) {
+    if (!email || !password) {
       setErr('All fields must be filled!');
       return;
     }
-    await login(username,password)
+    await login(email,password)
   }
 
   const handleSignup = async () => {
@@ -172,7 +181,7 @@ export default function AuthDialog() {
               Don’t have an account?{" "}
               <button
                 type="button"
-                onClick={() => setIsLogin(false)}
+                onClick={() => {setIsLogin(false);handleL_SChange()}}
                 className={`text-indigo-600 ${theme == 'dark' ? 'dark:text-indigo-400' : ''} hover:underline`}
               >
                 Sign up
@@ -183,7 +192,7 @@ export default function AuthDialog() {
               Already have an account?{" "}
               <button
                 type="button"
-                onClick={() => setIsLogin(true)}
+                onClick={() => {setIsLogin(true);handleL_SChange()}}
                 className={`text-indigo-600 ${theme == 'dark' ? 'dark:text-indigo-400' : ''} hover:underline`}
               >
                 Login
