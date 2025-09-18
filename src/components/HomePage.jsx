@@ -30,11 +30,16 @@ export default function Home() {
 
         <div className="flex items-center space-x-4">
           <nav className="hidden md:flex space-x-4">
-            <Link to='/auth' className={`text-gray-600 ${theme =='dark' ? 'dark:text-gray-300 dark:hover:text-indigo-400' : ''} hover:text-indigo-600 `}>Login</Link>
-            <a href="#" className={`text-gray-600 ${theme =='dark' ? 'dark:text-gray-300 dark:hover:text-indigo-400' : ''} hover:text-indigo-600 `}>Entries</a>
-            <a href="#" className={`text-gray-600 ${theme =='dark' ? 'dark:text-gray-300 dark:hover:text-indigo-400' : ''} hover:text-indigo-600 `}>Calendar</a>
-            <a href="#" className={`text-gray-600 ${theme =='dark' ? 'dark:text-gray-300 dark:hover:text-indigo-400' : ''} hover:text-indigo-600 `}>Profile</a>
-            <a href="#" className={`text-gray-600 ${theme =='dark' ? 'dark:text-gray-300 dark:hover:text-indigo-400' : ''} hover:text-indigo-600 `}>Logout</a>
+            {user && <>
+              <a href="#" className={`text-gray-600 ${theme =='dark' ? 'dark:text-gray-300 dark:hover:text-indigo-400' : ''} hover:text-indigo-600 `}>Profile</a>
+              <a href="#" className={`text-gray-600 ${theme =='dark' ? 'dark:text-gray-300 dark:hover:text-indigo-400' : ''} hover:text-indigo-600 `}>Logout</a>
+            </>}
+            {!user && <>
+              <Link to='/auth' className={`text-gray-600 ${theme =='dark' ? 'dark:text-gray-300 dark:hover:text-indigo-400' : ''} hover:text-indigo-600 `}>Login</Link>
+            </>
+            }
+            {/* <a href="#" className={`text-gray-600 ${theme =='dark' ? 'dark:text-gray-300 dark:hover:text-indigo-400' : ''} hover:text-indigo-600 `}>Entries</a> */}
+            {/* <a href="#" className={`text-gray-600 ${theme =='dark' ? 'dark:text-gray-300 dark:hover:text-indigo-400' : ''} hover:text-indigo-600 `}>Calendar</a> */}
           </nav>
 
           {/* Dark mode toggle */}
